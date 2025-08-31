@@ -1,0 +1,231 @@
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  //  базовые переменные (общие для всех тем) 
+  :root {
+    --bg: #1e1e1e;
+    --calc-bg: #373636;
+    --display-bg: #4d4c4c;
+    --display-color: #fff;
+    --btn-bg: #868383;
+    --btn-color: #fff;
+    --btn-func-bg: #666666;
+    --btn-hover: #9a9696;
+    --btn-func-hover: #777373;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: var(--bg);
+    font-family: Arial, sans-serif;
+  }
+
+//  светлая тема 
+  [data-theme="light"] {
+    --bg: #f2f2f2;
+    --calc-bg: #ffffff;
+    --display-bg: #ececec;
+    --display-color: #000;
+    --btn-bg: #d6d6d6;
+    --btn-color: #000;
+    --btn-func-bg: #bcbcbc;
+    --btn-hover: #c4c4c4;
+    --btn-func-hover: #a5a5a5;
+  }
+
+//  тёмная тема 
+  [data-theme="dark"] {
+    --bg: #1e1e1e;
+    --calc-bg: #373636;
+    --display-bg: #4d4c4c;
+    --display-color: #fff;
+    --btn-bg: #868383;
+    --btn-color: #fff;
+    --btn-func-bg: #666666;
+    --btn-hover: #9a9696;
+    --btn-func-hover: #777373;
+  }
+
+  .calculator {
+    max-width: 300px;
+    width: 100%;
+    background: var(--calc-bg);
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    overflow: hidden;
+
+    &__display {
+      background: var(--display-bg);
+      color: var(--display-color);
+      font-size: 2.5rem;
+      padding: 30px 15px 10px 10px;
+      text-align: right;
+      white-space: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      min-height: 90px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &__buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+
+      .btn,
+      .btn__func,
+      .btn__operator {
+        padding: 18px;
+        font-size: 1.2rem;
+        border: none;
+        cursor: pointer;
+        transition: all ease 0.3s;
+        min-height: 65px;
+      }
+
+      .btn {
+        background: var(--btn-bg);
+        color: var(--btn-color);
+
+        &:hover {
+          background: var(--btn-hover);
+        }
+      }
+
+      .btn__func {
+        background: var(--btn-func-bg);
+        color: var(--btn-color);
+
+        &:hover {
+          background: var(--btn-func-hover);
+        }
+      }
+
+      .btn__operator {
+        background: #ff9500 !important;
+        color: #fff !important;
+
+        &:hover {
+          background: rgb(255, 175, 106) !important;
+        }
+      }
+
+      .zero {
+        grid-column: span 2;
+      }
+    }
+  }
+
+  .theme-switcher {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+
+    button {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background: #ccc;
+      transition: 0.3s;
+
+      &:hover {
+        background: #bbb;
+      }
+    }
+  }
+
+//  адаптив для планшетов 
+  @media (max-width: 768px) {
+    .calculator {
+      max-width: 280px;
+
+      &__display {
+        font-size: 2.2rem;
+        padding: 25px 12px 8px 0;
+        min-height: 80px;
+      }
+
+      &__buttons {
+
+        .btn,
+        .btn__func,
+        .btn__operator {
+          padding: 16px;
+          font-size: 1.1rem;
+          min-height: 60px;
+        }
+      }
+    }
+  }
+
+//  адаптив для мобильных
+  @media (max-width: 480px) {
+
+    .calculator {
+      max-width: 250px;
+      border-radius: 12px;
+
+      &__display {
+        font-size: 2rem;
+        padding: 20px 10px 5px 0;
+        min-height: 70px;
+      }
+
+      &__buttons {
+
+        .btn,
+        .btn__func,
+        .btn__operator {
+          padding: 14px;
+          font-size: 1rem;
+          min-height: 55px;
+        }
+      }
+    }
+
+    .theme-switcher {
+      margin-bottom: 15px;
+
+      button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+// адаптив для маленьких экранов 
+  @media (max-width: 320px) {
+    .calculator {
+      max-width: 250px;
+
+      &__display {
+        font-size: 1.8rem;
+        padding: 15px 8px 5px 0;
+        min-height: 60px;
+      }
+
+      &__buttons {
+
+        .btn,
+        .btn__func,
+        .btn__operator {
+          padding: 12px;
+          font-size: 0.9rem;
+          min-height: 50px;
+        }
+      }
+    }
+  }
