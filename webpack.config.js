@@ -11,7 +11,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,        // <── добавляем
+        test: /\.js$/, 
         exclude: /node_modules/,
         type: 'javascript/auto',
       },
@@ -33,5 +33,5 @@ module.exports = {
     open: true,
   },
   mode: 'development',
-  experiments: { outputModule: false }, // <── на всякий случай
+  experiments: { outputModule: false }, 
 };

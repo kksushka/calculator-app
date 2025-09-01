@@ -4,7 +4,6 @@
     box-sizing: border-box;
   }
 
-  //  базовые переменные (общие для всех тем) 
   :root {
     --bg: #1e1e1e;
     --calc-bg: #373636;
@@ -28,7 +27,6 @@
     font-family: Arial, sans-serif;
   }
 
-//  светлая тема 
   [data-theme="light"] {
     --bg: #f2f2f2;
     --calc-bg: #ffffff;
@@ -41,7 +39,6 @@
     --btn-func-hover: #a5a5a5;
   }
 
-//  тёмная тема 
   [data-theme="dark"] {
     --bg: #1e1e1e;
     --calc-bg: #373636;
@@ -63,6 +60,7 @@
     overflow: hidden;
 
     &__display {
+      position: relative;
       background: var(--display-bg);
       color: var(--display-color);
       font-size: 2.5rem;
@@ -76,6 +74,23 @@
 
       &::-webkit-scrollbar {
         display: none;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 25px;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent);
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+      }
+
+      &.scrolled::before {
+        opacity: 1;
       }
     }
 
@@ -114,11 +129,11 @@
       }
 
       .btn__operator {
-        background: #ff9500 !important;
-        color: #fff !important;
+        background: #ff9500;
+        color: #fff;
 
         &:hover {
-          background: rgb(255, 175, 106) !important;
+          background: rgb(255, 175, 106);
         }
       }
 
@@ -144,10 +159,13 @@
       &:hover {
         background: #bbb;
       }
+
+      &.active {
+        background: #ff9500;
+      }
     }
   }
 
-//  адаптив для планшетов 
   @media (max-width: 768px) {
     .calculator {
       max-width: 280px;
@@ -171,7 +189,6 @@
     }
   }
 
-//  адаптив для мобильных
   @media (max-width: 480px) {
 
     .calculator {
@@ -206,7 +223,6 @@
     }
   }
 
-// адаптив для маленьких экранов 
   @media (max-width: 320px) {
     .calculator {
       max-width: 250px;

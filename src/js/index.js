@@ -1,131 +1,94 @@
 import "../styles/main.scss";
+import { formatNumber } from './utils.js';
+import { evaluateExpression } from './calculator.js';
+import { updateDisplay } from './display.js';
+import { initTheme } from './theme.js';
 
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll(".btn, .btn__func, .btn__operator");
 
-let expression = "";
-let resultShown = false;
+let currentExpression = "";
+let isResultShown = false;
+const MAX_EXPRESSION_LENGTH = 30;
 
-const MAX_LENGTH = 30; // максимальная длина выражения
-
-// ограничение до 7 знаков после запятой
-const formatNumber = (num) => {
-  if (!isFinite(num)) return "Error";
-  if (Math.abs(num) > 1e10) return num.toExponential(7);
-
-  let str = Number(num).toFixed(7);
-  str = str.replace(/\.?0+$/, "");
-  return str;
-};
-
-// обновление дисплея
-const updateDisplay = (value) => {
-  display.textContent = value || "0";
-  display.scrollLeft = display.scrollWidth; // автоскролл вправо
-};
-
-// вычисление выражения
-const evaluateExpression = (expr) => {
-  // Заменяем проценты на их числовые эквиваленты (деление на 100)
-  const exprWithPercent = expr.replace(/(\d+(\.\d+)?)%/g, (match, num) => {
-    return `(${num}/100)`;
-  });
-
-  const mathExpr = exprWithPercent
-    .replace(/÷/g, "/")
-    .replace(/×/g, "*")
-    .replace(/−/g, "-");
-
-  try {
-    const result = Function(`"use strict"; return (${mathExpr})`)();
-    return result;
-  } catch {
-    return NaN;
-  }
-};
-
-const operators = {
+const operatorSymbols = {
   plus: "+",
   minus: "−",
   multiply: "×",
   divide: "÷",
 };
 
-// обработка кликов
-buttons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const { action } = btn.dataset;
-    const value = btn.textContent;
-
-    if (!action) {
-      if (resultShown) {
-        expression = "";
-        resultShown = false;
-      }
-      if (value === "." && /\.\d*$/.test(expression)) return;
-      if (expression.length >= MAX_LENGTH) return;
-
-      expression += value;
-      updateDisplay(expression);
-      return;
+const buttonActions = {
+  clear: () => {
+    currentExpression = "";
+    updateDisplay(display, "0");
+  },
+  sign: () => {
+    const numberMatch = currentExpression.match(/(-?\d+(?:\.\d+)?)$/);
+    if (numberMatch) {
+      const numberString = numberMatch[0];
+      const expressionBeforeNumber = currentExpression.slice(0, -numberString.length);
+      const invertedNumber = numberString.startsWith("-")
+        ? numberString.slice(1)
+        : "-" + numberString;
+      currentExpression = expressionBeforeNumber + invertedNumber;
+      updateDisplay(display, currentExpression);
     }
-
-    const actions = {
-      clear: () => {
-        expression = "";
-        updateDisplay("0");
-      },
-      sign: () => {
-        const match = expression.match(/(-?\d+(?:\.\d+)?)$/);
-        if (match) {
-          const numStr = match[0];
-          const before = expression.slice(0, -numStr.length);
-          const newNum = numStr.startsWith("-")
-            ? numStr.slice(1)
-            : "-" + numStr;
-          expression = before + newNum;
-          updateDisplay(expression);
-        }
-      },
-      percent: () => {
-        // Просто добавляем символ % к выражению
-        if (expression.length >= MAX_LENGTH) return;
-        expression += "%";
-        updateDisplay(expression);
-      },
-      equals: () => {
-        if (expression) {
-          const result = evaluateExpression(expression);
-          const formatted = formatNumber(result);
-          updateDisplay(formatted);
-          expression = formatted;
-          resultShown = true;
-        }
-      },
-    };
-
-    if (actions[action]) {
-      actions[action]();
-    } else if (operators[action]) {
-      if (resultShown) resultShown = false;
-      if (expression && !/[+\-*/÷×−]$/.test(expression)) {
-        expression += operators[action];
-        updateDisplay(expression);
-      }
+  },
+  percent: () => {
+    if (currentExpression.length >= MAX_EXPRESSION_LENGTH) return;
+    currentExpression += "%";
+    updateDisplay(display, currentExpression);
+  },
+  equals: () => {
+    if (currentExpression) {
+      const calculationResult = evaluateExpression(currentExpression);
+      const formattedResult = formatNumber(calculationResult);
+      updateDisplay(display, formattedResult);
+      currentExpression = formattedResult;
+      isResultShown = true;
     }
+  }
+};
+
+const handleButtonClick = (button) => {
+  const { action } = button.dataset;
+  const buttonValue = button.textContent;
+
+  if (!action) {
+    if (isResultShown) {
+      currentExpression = "";
+      isResultShown = false;
+    }
+    if (buttonValue === "." && /\.\d*$/.test(currentExpression)) return;
+    if (currentExpression.length >= MAX_EXPRESSION_LENGTH) return;
+
+    currentExpression += buttonValue;
+    updateDisplay(display, currentExpression);
+    return;
+  }
+
+  if (buttonActions[action]) {
+    buttonActions[action]();
+  } else if (operatorSymbols[action]) {
+    if (isResultShown) isResultShown = false;
+
+    if (!currentExpression && action === "minus") {
+      currentExpression = "−";
+      updateDisplay(display, currentExpression);
+    } else if (currentExpression && !/[+\-*/÷×−]$/.test(currentExpression)) {
+      currentExpression += operatorSymbols[action];
+      updateDisplay(display, currentExpression);
+    }
+  }
+};
+
+export const initCalculator = () => {
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => handleButtonClick(button));
   });
-});
 
-// тема
-const themeButtons = document.querySelectorAll(".theme-switcher button");
+  initTheme();
+};
 
-themeButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const theme = btn.id === "light-theme" ? "light" : "dark";
-    document.body.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  });
-});
-
-const savedTheme = localStorage.getItem("theme") || "dark";
-document.body.setAttribute("data-theme", savedTheme);
+document.addEventListener('DOMContentLoaded', initCalculator);
