@@ -49,7 +49,7 @@ const buttonActions = {
       const calculationResult = evaluateExpression(currentExpression);
 
       if (!isFiniteSafe(calculationResult)) {
-        updateDisplay(display, displayWrapper, 'Ошибка');
+        updateDisplay(display, displayWrapper, 'Error');
         currentExpression = '';
         return;
       }
@@ -96,7 +96,7 @@ const handleButtonClick = (button) => {
 
 const initCalculator = () => {
   buttons.forEach((button) => {
-    button.addEventListener('click', () => handleButtonClick(button));
+    button.addEventListener('pointerdown', () => handleButtonClick(button));
   });
 
   initTheme();
