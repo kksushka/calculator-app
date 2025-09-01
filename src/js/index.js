@@ -96,7 +96,7 @@ const handleButtonClick = (button) => {
 
 const initCalculator = () => {
   buttons.forEach((button) => {
-    button.addEventListener('pointerdown', () => handleButtonClick(button));
+    button.addEventListener('click', () => handleButtonClick(button));
   });
 
   initTheme();
