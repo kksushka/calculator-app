@@ -5,6 +5,7 @@ import { updateDisplay } from './display.js';
 import { initTheme } from './theme.js';
 
 const display = document.getElementById("display");
+const displayWrapper = document.getElementById("display-wrapper");
 const buttons = document.querySelectorAll(".btn, .btn__func, .btn__operator");
 
 let currentExpression = "";
@@ -21,7 +22,7 @@ const operatorSymbols = {
 const buttonActions = {
   clear: () => {
     currentExpression = "";
-    updateDisplay(display, "0");
+    updateDisplay(display, displayWrapper, "0");
   },
   sign: () => {
     const numberMatch = currentExpression.match(/(-?\d+(?:\.\d+)?)$/);
@@ -32,19 +33,19 @@ const buttonActions = {
         ? numberString.slice(1)
         : "-" + numberString;
       currentExpression = expressionBeforeNumber + invertedNumber;
-      updateDisplay(display, currentExpression);
+      updateDisplay(display, displayWrapper, currentExpression);
     }
   },
   percent: () => {
     if (currentExpression.length >= MAX_EXPRESSION_LENGTH) return;
     currentExpression += "%";
-    updateDisplay(display, currentExpression);
+    updateDisplay(display, displayWrapper, currentExpression);
   },
   equals: () => {
     if (currentExpression) {
       const calculationResult = evaluateExpression(currentExpression);
       const formattedResult = formatNumber(calculationResult);
-      updateDisplay(display, formattedResult);
+      updateDisplay(display, displayWrapper, formattedResult);
       currentExpression = formattedResult;
       isResultShown = true;
     }
@@ -64,7 +65,8 @@ const handleButtonClick = (button) => {
     if (currentExpression.length >= MAX_EXPRESSION_LENGTH) return;
 
     currentExpression += buttonValue;
-    updateDisplay(display, currentExpression);
+
+    updateDisplay(display, displayWrapper, currentExpression);
     return;
   }
 
@@ -75,10 +77,10 @@ const handleButtonClick = (button) => {
 
     if (!currentExpression && action === "minus") {
       currentExpression = "−";
-      updateDisplay(display, currentExpression);
+      updateDisplay(display, displayWrapper, currentExpression);
     } else if (currentExpression && !/[+\-*/÷×−]$/.test(currentExpression)) {
       currentExpression += operatorSymbols[action];
-      updateDisplay(display, currentExpression);
+      updateDisplay(display, displayWrapper, currentExpression);
     }
   }
 };

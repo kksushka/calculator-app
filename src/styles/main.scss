@@ -76,21 +76,30 @@
         display: none;
       }
 
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 25px;
-        background: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent);
-        opacity: 0;
-        transition: opacity 0.3s;
-        pointer-events: none;
-      }
+      &-wrapper {
+        position: relative;
+        z-index: 1;
 
-      &.scrolled::before {
-        opacity: 1;
+        width: 100%;
+        overflow: hidden;
+
+        &::before {
+          content: "";
+          position: absolute;
+          z-index: 2;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 25px;
+          background: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent);
+          opacity: 0;
+          transition: opacity 0.3s;
+          pointer-events: none;
+        }
+
+        &.shadow::before {
+          opacity: 1;
+        }
       }
     }
 
