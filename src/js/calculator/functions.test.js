@@ -1,4 +1,4 @@
-import { applyFunction } from './functions';
+import { applyFunction } from './functions.js';
 
 describe('applyFunction', () => {
   describe('square', () => {

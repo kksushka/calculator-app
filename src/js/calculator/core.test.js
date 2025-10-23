@@ -6,9 +6,9 @@ import {
   pow,
   nthRoot,
   normalizeUnaryMinus,
-} from '../utils/helpers';
+} from '../utils/helpers.js';
 
-import { calculate } from './core';
+import { calculate } from './core.js';
 
 describe('abs', () => {
   test('returns a positive number', () => {

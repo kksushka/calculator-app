@@ -1,10 +1,10 @@
-import { evaluateExpression } from '../calculator/evaluator';
-import { applyFunction } from '../calculator/functions';
-import { memoryActions } from '../calculator/memory';
-import { formatNumber } from '../utils/format';
-import { isFiniteSafe, pow, nthRoot } from '../utils/helpers';
-import updateDisplay from './display';
-import { CommandFactory } from './commands/index';
+import { evaluateExpression } from '../calculator/evaluator.js';
+import { applyFunction } from '../calculator/functions.js';
+import { memoryActions } from '../calculator/memory.js';
+import { formatNumber } from '../utils/format.js';
+import { isFiniteSafe, pow, nthRoot } from '../utils/helpers.js';
+import updateDisplay from './display.js';
+import { CommandFactory } from './commands/index.js';
 
 class Calculator {
   constructor(display, wrapper) {

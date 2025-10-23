@@ -1,4 +1,4 @@
-import { CalculatorCommand } from './base';
+import { CalculatorCommand } from './base.js';
 
 export class SpecialOperationCommand extends CalculatorCommand {
   constructor(calculator, operationType) {

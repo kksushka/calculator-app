@@ -1,4 +1,4 @@
-import { abs, isFiniteSafe } from './helpers';
+import { abs, isFiniteSafe } from './helpers.js';
 
 export const trimZeros = (s) =>
   s

@@ -1,4 +1,4 @@
-import { pow } from '../utils/helpers';
+import { pow } from '../utils/helpers.js';
 
 const precedence = { '+': 1, '-': 1, '*': 2, '/': 2, '^': 3 };
 

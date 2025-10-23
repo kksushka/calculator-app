@@ -1,5 +1,5 @@
-import { calculate } from './core';
-import { normalizeUnaryMinus } from '../utils/helpers';
+import { calculate } from './core.js';
+import { normalizeUnaryMinus } from '../utils/helpers.js';
 
 export const evaluateExpression = (expr) => {
   try {

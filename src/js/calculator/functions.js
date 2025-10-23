@@ -1,4 +1,4 @@
-import { pow, nthRoot, factorial } from '../utils/helpers';
+import { pow, nthRoot, factorial } from '../utils/helpers.js';
 
 export const applyFunction = (fn, val) => {
   if (typeof val !== 'number' || isNaN(val)) return NaN;

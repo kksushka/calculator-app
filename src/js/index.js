@@ -1,5 +1,5 @@
-import initTheme from './ui/theme';
-import { initButtons } from './ui/buttons';
+import initTheme from './ui/theme.js';
+import { initButtons } from './ui/buttons.js';
 import '../styles/main.scss';
 
 document.addEventListener('DOMContentLoaded', () => {

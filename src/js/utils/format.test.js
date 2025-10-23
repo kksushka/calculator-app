@@ -1,4 +1,4 @@
-import { trimZeros, toFixedSafe, formatNumber } from './format';
+import { trimZeros, toFixedSafe, formatNumber } from './format.js';
 
 describe('trimZeros', () => {
   test('removes trailing zeros from decimal part', () => {

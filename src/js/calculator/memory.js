@@ -1,5 +1,5 @@
-import { evaluateExpression } from './evaluator';
-import { isFiniteSafe } from '../utils/helpers';
+import { evaluateExpression } from './evaluator.js';
+import { isFiniteSafe } from '../utils/helpers.js';
 
 let memory = 0;
 

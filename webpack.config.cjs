@@ -7,14 +7,14 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '',
+    publicPath: '/',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        type: 'javascript/auto',
+        type: 'javascript/auto', 
       },
       {
         test: /\.scss$/i,
@@ -26,13 +26,19 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      filename: 'index.html',
     }),
   ],
   devServer: {
-    static: './dist',
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
     port: 3000,
     open: true,
+    hot: true,
   },
   mode: 'development',
-  experiments: { outputModule: false },
+  resolve: {
+    extensions: ['.js'],
+  },
 };

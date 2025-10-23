@@ -6,7 +6,7 @@ import {
   pow,
   nthRoot,
   normalizeUnaryMinus,
-} from './helpers';
+} from './helpers.js';
 
 describe('abs', () => {
   test('returns absolute value of positive number', () => {

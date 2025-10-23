@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "airbnb-base",
-    "prettier"
-  ],
+  "extends": ["airbnb-base", "prettier"],
   "env": {
     "browser": true,
     "es2021": true,
@@ -14,64 +11,29 @@
   },
   "rules": {
     "no-console": "off",
-    "import/extensions": [
-      "error",
-      "always",
-      {
-        "js": "never"
-      }
-    ],
+    "import/extensions": "off",
     "import/prefer-default-export": "off",
-    "no-restricted-globals": [
-      "error",
-      "event",
-      "name",
-      "length"
-    ],
+    "no-restricted-globals": ["error", "event", "name", "length"],
     "no-trailing-spaces": "error",
-    "eol-last": [
-      "error",
-      "always"
-    ],
+    "eol-last": ["error", "always"],
     "no-plusplus": "off",
-    "no-param-reassign": [
-      "error",
-      {
-        "props": true,
-        "ignorePropertyModificationsFor": [
-          "x",
-          "n",
-          "acc",
-          "el",
-          "elem",
-          "node",
-          "item"
-        ]
-      }
-    ],
+    "no-param-reassign": ["error", {
+      "props": true,
+      "ignorePropertyModificationsFor": ["x", "n", "acc", "el", "elem", "node", "item"]
+    }],
     "one-var": "off",
-    "operator-linebreak": [
-      "error",
-      "after",
-      {
-        "overrides": {
-          "?": "before",
-          ":": "before"
-        }
+    "operator-linebreak": ["error", "after", {
+      "overrides": {
+        "?": "before",
+        ":": "before"
       }
-    ],
+    }],
     "implicit-arrow-linebreak": "off",
     "object-curly-newline": "off",
     "function-paren-newline": "off",
-    "max-classes-per-file": [
-      "error",
-      5
-    ],
+    "max-classes-per-file": ["error", 5],
     "class-methods-use-this": "off",
-    "comma-dangle": [
-      "error",
-      "only-multiline"
-    ],
+    "comma-dangle": ["error", "only-multiline"],
     "no-else-return": "off",
     "default-case": "off",
     "prefer-destructuring": "off",

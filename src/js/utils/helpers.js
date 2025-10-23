@@ -26,7 +26,7 @@ const intPow = (base, exp) => {
 };
 
 export const ln = (x) => {
-  let currentX = x; // Исправлено: создаем новую переменную вместо изменения параметра
+  let currentX = x;
   if (currentX <= 0) return NaN;
   let y = 0;
   while (currentX >= 2) {

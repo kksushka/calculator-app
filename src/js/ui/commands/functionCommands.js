@@ -1,4 +1,4 @@
-import { CalculatorCommand } from './base';
+import { CalculatorCommand } from './base.js';
 
 export class FunctionCommand extends CalculatorCommand {
   constructor(calculator, functionName) {

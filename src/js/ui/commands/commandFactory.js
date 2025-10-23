@@ -1,11 +1,11 @@
-import { DigitCommand, SignCommand, PercentCommand } from './inputCommands';
+import { DigitCommand, SignCommand, PercentCommand } from './inputCommands.js';
 import {
   OperationCommand,
   EqualsCommand,
   ClearCommand,
-} from './operationCommands';
-import { FunctionCommand } from './functionCommands';
-import { SpecialOperationCommand, MemoryCommand } from './specialCommands';
+} from './operationCommands.js';
+import { FunctionCommand } from './functionCommands.js';
+import { SpecialOperationCommand, MemoryCommand } from './specialCommands.js';
 
 export class CommandFactory {
   constructor(calculator) {
