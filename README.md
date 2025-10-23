@@ -27,23 +27,39 @@ npm run dev
 
 npm run build
 
-## Структура проекта --> переделать!!!
+## Структура проекта 
 
-1. src/js/ — JavaScript-модули:
+1. src/js/ — исходный код приложения;
 
-index.js — точка входа, инициализация калькулятора и темы.
-calculator.js — парсер и вычислитель выражений.
-display.js — логика обновления дисплея калькулятора.
-theme.js — переключение темы (светлая/тёмная).
-utils.js — вспомогательные функции (форматирование чисел, математика).
+2. calculator/:
 
-2. src/styles/ — стили приложения:
+calculator/core.js — основная логика калькулятора.
+calculator/evaluator.js — модуль для вычисления выражений.
+calculator/functions.js — математические функции.
+calculator/memory.js — работа с памятью калькулятора.
+
+3. ui/ — интерфейсные компоненты:
+
+   commands/ — обработка команд:
+
+    base.js — базовый класс команд.
+    commandFactory.js — фабрика команд.
+    functionCommand.js, inputCommand.js, operationCommand.js, specialCommand.js — реализации различных типов команд.
+    
+    buttons.js — кнопки калькулятора.
+    display.js — экран калькулятора.
+    theme.js — настройка темы интерфейса.
+
+4. utils/ — вспомогательные утилиты;
+
+5. src/styles/ — стили приложения:
 
 main.scss — основной SCSS-файл.
 main.css — скомпилированный CSS.
 
-3. src/index.html — главная HTML-страница.
-4. dist/ — папка для собранного проекта (создаётся после npm run build).
-5. webpack.config.js — конфигурация Webpack.
-6. .eslintrc.json — конфигурация ESLint.
-7. package.json — метаданные проекта, скрипты и зависимости.
+6. src/index.html — главная HTML-страница.
+7. dist/ — папка для собранного проекта (создаётся после npm run build).
+8. webpack.config.cjs — конфигурация Webpack.
+9. .eslintrc.json — конфигурация ESLint.
+10. package.json — метаданные проекта, скрипты и зависимости.
+11. core.test.js, evaluator.test.js, functions.test.js, format.test.js, helpers.test.js - тесты для основных модулей 
