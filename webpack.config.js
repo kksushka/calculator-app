@@ -12,7 +12,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/, 
+        test: /\.js$/,
         exclude: /node_modules/,
         type: 'javascript/auto',
       },
@@ -34,5 +34,5 @@ module.exports = {
     open: true,
   },
   mode: 'development',
-  experiments: { outputModule: false }, 
+  experiments: { outputModule: false },
 };

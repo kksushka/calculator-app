@@ -27,7 +27,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-[data-theme=light] {
+[data-theme='light'] {
   --bg: #f2f2f2;
   --calc-bg: #ffffff;
   --display-bg: #ececec;
@@ -39,7 +39,7 @@ body {
   --btn-func-hover: #a5a5a5;
 }
 
-[data-theme=dark] {
+[data-theme='dark'] {
   --bg: #1e1e1e;
   --calc-bg: #373636;
   --display-bg: #4d4c4c;
@@ -52,7 +52,7 @@ body {
 }
 
 .calculator {
-  max-width: 300px;
+  max-width: 500px;
   width: 100%;
   background: var(--calc-bg);
   border-radius: 15px;
@@ -60,6 +60,7 @@ body {
   overflow: hidden;
 }
 .calculator__display {
+  position: relative;
   background: var(--display-bg);
   color: var(--display-color);
   font-size: 2.5rem;
@@ -74,9 +75,31 @@ body {
 .calculator__display::-webkit-scrollbar {
   display: none;
 }
+.calculator__display-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+}
+.calculator__display-wrapper::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 25px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.calculator__display-wrapper.shadow::before {
+  opacity: 1;
+}
 .calculator__buttons {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 1px;
 }
 .calculator__buttons .btn,
@@ -88,6 +111,13 @@ body {
   cursor: pointer;
   transition: all ease 0.3s;
   min-height: 65px;
+}
+.calculator__buttons .btn__func.active-func {
+  background: #ff9500 !important;
+  color: #fff !important;
+  border: 1px solid #ff9500;
+  box-shadow: 0 0 2px rgba(255, 149, 0, 0.4);
+  transition: all 0.2s linear;
 }
 .calculator__buttons .btn {
   background: var(--btn-bg);
@@ -104,11 +134,11 @@ body {
   background: var(--btn-func-hover);
 }
 .calculator__buttons .btn__operator {
-  background: #ff9500 !important;
-  color: #fff !important;
+  background: #ff9500;
+  color: #fff;
 }
 .calculator__buttons .btn__operator:hover {
-  background: rgb(255, 175, 106) !important;
+  background: rgb(255, 175, 106);
 }
 .calculator__buttons .zero {
   grid-column: span 2;
@@ -126,9 +156,13 @@ body {
   cursor: pointer;
   background: #ccc;
   transition: 0.3s;
+  color: #000;
 }
 .theme-switcher button:hover {
   background: #bbb;
+}
+.theme-switcher button.active {
+  background: #ff9500;
 }
 
 @media (max-width: 768px) {
@@ -146,6 +180,7 @@ body {
     padding: 16px;
     font-size: 1.1rem;
     min-height: 60px;
+    transition: none;
   }
 }
 @media (max-width: 480px) {
@@ -164,6 +199,7 @@ body {
     padding: 14px;
     font-size: 1rem;
     min-height: 55px;
+    transition: none;
   }
   .theme-switcher {
     margin-bottom: 15px;
@@ -188,5 +224,6 @@ body {
     padding: 12px;
     font-size: 0.9rem;
     min-height: 50px;
+    transition: none;
   }
-}/*# sourceMappingURL=main.css.map */
+} /*# sourceMappingURL=main.css.map */
