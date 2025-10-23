@@ -1,6 +1,6 @@
 import initTheme from './ui/theme.js';
 import { initButtons } from './ui/buttons.js';
-import '../styles/main.css';
+import '../styles/main.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
   const display = document.getElementById('display');
